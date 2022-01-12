@@ -31,7 +31,6 @@ IMAGE_X_CENTER = IMAGE_WIDTH / 2
 IMAGE_Y_CENTER = IMAGE_HEIGHT / 2
 PATH = os.environ['HOME'] + '/thefile.txt'
 
-
 class dl_pointto():
 
     def __init__(self):
@@ -58,10 +57,11 @@ class dl_pointto():
         global xc, yc, xc_prev,yc_prev, find_count
 
         self.obj_info = obj
+        rospy.loginfo(obj.name)
 
         _, obj_loc, _ = self.get_object_needed_info()
         xc, yc = self.cal_obj_center(obj_loc)
-
+        
         if self.check_object_found():
 
             if find_count >= 10:
@@ -120,10 +120,11 @@ class dl_pointto():
         return object_found
 
     def execute_(self):
-
+        global find_count
         while not self.object_still:
             rospy.sleep(4)
-            rospy.loginfo("Object not found")
+            #rospy.loginfo("Object not found")
+            rospy.loginfo("find_count"+str(find_count))
 
         while not self.point_done:
             self.start_pointing()
@@ -225,6 +226,7 @@ if __name__ == '__main__':
     obj = dl_pointto()
 
     while not rospy.is_shutdown():
-        obj.execute_()
         obj.__init__()
+        obj.execute_()
+        
 
