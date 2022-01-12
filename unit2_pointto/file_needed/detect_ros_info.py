@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-## Author: Rohit
-## Date: July, 25, 2017
+## Author: Guan
+## Date: January, 12, 2022
 # Purpose: Ros node to detect objects using tensorflow
 
 import os
